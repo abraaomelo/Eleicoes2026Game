@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
         [Min(0f)]
         public float afterMeters = 100f;
 
-        [Tooltip("Valor adicionado à velocidade ao atingir essa distância.")]
+        [Tooltip("Valor acrescentado à velocidade neste marco.")]
         [Min(0f)]
         public float increaseBy = 0.5f;
     }
@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
     [SerializeField, Min(0f)] private float proposalSpeed = 3f;
 
     [Header("Distância")]
-    [Tooltip("Quantos metros correspondem a uma unidade de movimento da rua.")]
+    [Tooltip("Metros correspondentes a uma unidade de movimento da rua.")]
     [SerializeField, Min(0.01f)]
     private float metersPerWorldUnit = 1f;
 
@@ -60,6 +60,13 @@ public class GameController : MonoBehaviour
     private List<SpeedIncrease> proposalProgression =
         new List<SpeedIncrease>();
 
+    [Header("Cenas de resultado")]
+    [SerializeField] private string leftSceneName = "GameOverLeft";
+    [SerializeField] private string rightSceneName = "GameOverRight";
+    [SerializeField] private string centerSceneName = "GameOverCenter";
+    [SerializeField]
+    private string noProposalsSceneName = "GameOverNoProposals";
+
     [Header("Contadores — acompanhe durante o Play")]
     [SerializeField] private float distanceMeters;
     [SerializeField] private int leftPoints;
@@ -77,7 +84,6 @@ public class GameController : MonoBehaviour
     public int RightPoints => rightPoints;
     public int CollectedProposals => collectedProposals;
 
-    // Valor que exibiremos como "Propostas" no HUD.
     public int TotalProposalPoints => leftPoints + rightPoints;
 
     public RunResult Result => result;
@@ -100,6 +106,8 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        LastRunData.Clear();
+
         distanceMeters = 0f;
         leftPoints = 0;
         rightPoints = 0;
@@ -137,9 +145,7 @@ public class GameController : MonoBehaviour
                 continue;
 
             if (distanceMeters >= Mathf.Max(0f, step.afterMeters))
-            {
                 speed += Mathf.Max(0f, step.increaseBy);
-            }
         }
 
         return speed;
@@ -191,11 +197,34 @@ public class GameController : MonoBehaviour
         else
             result = RunResult.Tie;
 
-        Debug.Log(
-            $"GAME OVER — {result} | " +
-            $"Propostas: {TotalProposalPoints} | " +
-            $"Distância: {Mathf.FloorToInt(distanceMeters)}m"
+        LastRunData.Save(
+            TotalProposalPoints,
+            distanceMeters,
+            result
         );
+
+        string sceneName;
+
+        switch (result)
+        {
+            case RunResult.Left:
+                sceneName = leftSceneName;
+                break;
+
+            case RunResult.Right:
+                sceneName = rightSceneName;
+                break;
+
+            case RunResult.Tie:
+                sceneName = centerSceneName;
+                break;
+
+            default:
+                sceneName = noProposalsSceneName;
+                break;
+        }
+
+        SceneManager.LoadSceneAsync(sceneName);
     }
 
     public void RestartRun()
@@ -205,5 +234,4 @@ public class GameController : MonoBehaviour
         );
     }
 }
-
 
