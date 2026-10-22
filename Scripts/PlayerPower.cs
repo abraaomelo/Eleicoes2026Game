@@ -30,9 +30,6 @@ public class PlayerPower : MonoBehaviour
                 visual.color = new Color(0.6f, 0.2f, 0.8f);
                 break;
 
-            case 3:
-                visual.color = Color.blue;
-                break;
         }
     }
 }
