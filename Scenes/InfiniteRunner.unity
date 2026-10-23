@@ -1428,7 +1428,7 @@ MonoBehaviour:
     increaseBy: 0.6
   leftSceneName: GameOverLeft
   rightSceneName: GameOverRight
-  centerSceneName: GameOverCenter
+  centerSceneName: GameOverNoProposals
   noProposalsSceneName: GameOverNoProposals
   distanceMeters: 0
   leftPoints: 0
