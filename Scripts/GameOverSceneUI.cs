@@ -57,6 +57,15 @@ public class GameOverSceneUI : MonoBehaviour
         LastRunData.Clear();
         SceneManager.LoadSceneAsync(sceneName);
     }
+
+    public void OpenGlobalScore()
+    {
+        if (isLoading)
+            return;
+
+        isLoading = true;
+        SceneManager.LoadSceneAsync("GlobalScore");
+    }
 }
 
 

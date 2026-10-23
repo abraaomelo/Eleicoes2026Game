@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private string leftSceneName = "GameOverLeft";
     [SerializeField] private string rightSceneName = "GameOverRight";
     [SerializeField] private string centerSceneName = "GameOverCenter";
+
     [SerializeField]
     private string noProposalsSceneName = "GameOverNoProposals";
 
@@ -80,6 +81,7 @@ public class GameController : MonoBehaviour
     public bool IsRunning => isRunning;
 
     public float DistanceMeters => distanceMeters;
+
     public int LeftPoints => leftPoints;
     public int RightPoints => rightPoints;
     public int CollectedProposals => collectedProposals;
@@ -145,7 +147,9 @@ public class GameController : MonoBehaviour
                 continue;
 
             if (distanceMeters >= Mathf.Max(0f, step.afterMeters))
+            {
                 speed += Mathf.Max(0f, step.increaseBy);
+            }
         }
 
         return speed;
@@ -171,8 +175,9 @@ public class GameController : MonoBehaviour
 
         Debug.Log(
             $"Coletou: {proposal.ProposalName} | " +
-            $"Propostas: {TotalProposalPoints} | " +
-            $"Esquerda: {leftPoints} | Direita: {rightPoints}"
+            $"Quantidade coletada: {collectedProposals} | " +
+            $"Pontos de esquerda: {leftPoints} | " +
+            $"Pontos de direita: {rightPoints}"
         );
 
         return true;
@@ -188,20 +193,32 @@ public class GameController : MonoBehaviour
         if (playerMovement != null)
             playerMovement.enabled = false;
 
+        // Nenhuma proposta precisa ser verificada antes do empate.
         if (collectedProposals == 0)
+        {
             result = RunResult.NoProposals;
+        }
         else if (leftPoints > rightPoints)
+        {
             result = RunResult.Left;
+        }
         else if (rightPoints > leftPoints)
+        {
             result = RunResult.Right;
+        }
         else
+        {
             result = RunResult.Tie;
+        }
 
+        // Guarda a partida antes de carregar a próxima cena.
         LastRunData.Save(
             TotalProposalPoints,
             distanceMeters,
-            result
+            result,
+            collectedProposals
         );
+        GlobalScoreSubmission.QueueLastRun();
 
         string sceneName;
 
