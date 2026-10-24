@@ -33,8 +33,8 @@ public class GameOverSceneUI : MonoBehaviour
             : 0;
 
         statsText.text =
-            $"Propostas: {proposals}\n" +
-            $"Distância: {distance}m";
+            $"Propostas {proposals}\n" +
+            $"Distância {distance}m";
     }
 
     public void PlayAgain()
