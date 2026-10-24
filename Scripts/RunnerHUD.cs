@@ -30,14 +30,14 @@ public class RunnerHUD : MonoBehaviour
         if (proposalsText != null &&
             proposalPoints != lastProposalPoints)
         {
-            proposalsText.text = $"Propostas: {proposalPoints}";
+            proposalsText.text = $"{proposalPoints}";
             lastProposalPoints = proposalPoints;
         }
 
         if (distanceText != null &&
             distance != lastDistance)
         {
-            distanceText.text = $"Distância: {distance}m";
+            distanceText.text = $"{distance}m";
             lastDistance = distance;
         }
     }

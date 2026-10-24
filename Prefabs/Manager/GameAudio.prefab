@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7542837887747429913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7211215088159608249}
+  - component: {fileID: 342664981676000931}
+  m_Layer: 0
+  m_Name: GameAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7211215088159608249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542837887747429913}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 477.36005, y: 1447.2659, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &342664981676000931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542837887747429913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffc3189b300e482e84970c5fe868e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudio
+  effectsVolume: 0.8
+  normalRunning:
+    clip: {fileID: 8300000, guid: fad2d2e6d03d9416a8a41e5252afb257, type: 3}
+    volume: 0.5
+  fastRunning:
+    clip: {fileID: 8300000, guid: fd859d2b9a9dc4edf9d7e29188a94c9b, type: 3}
+    volume: 0.5
+  laneChange:
+    clip: {fileID: 8300000, guid: 396d1d0e1cf8f4b209ef9e01f24e87bf, type: 3}
+    volume: 0.5
+  buttonClick:
+    clip: {fileID: 8300000, guid: 9616d792a6eb4406b9ddd495d0d89fad, type: 3}
+    volume: 0.5
+  leftProposal:
+    clip: {fileID: 8300000, guid: 005e259e456794651ace580e41108626, type: 3}
+    volume: 0.5
+  rightProposal:
+    clip: {fileID: 8300000, guid: 050073b40be044f1caed453dce14d2f2, type: 3}
+    volume: 0.5
+  electronicUrn:
+    clip: {fileID: 8300000, guid: 050073b40be044f1caed453dce14d2f2, type: 3}
+    volume: 0.5
+  collision:
+    clip: {fileID: 8300000, guid: 507ab1a4e39014c04b12a3dd1de37a30, type: 3}
+    volume: 0.5
+  fastStartSpeed: 3.5
+  fastFullSpeed: 4.5
