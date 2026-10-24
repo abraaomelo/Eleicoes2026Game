@@ -1937,13 +1937,16 @@ MonoBehaviour:
   - {fileID: 897551918}
   - {fileID: 1333782552}
   - {fileID: 1496139376}
-  minSpawnInterval: 1.5
-  maxSpawnInterval: 1.8
+  minSpawnInterval: 1.23
+  maxSpawnInterval: 1.52
   maxIntervalChange: 0.25
   minimumEntryGap: 2
   blockedRetryInterval: 0.12
   obstacleWeight: 2
   proposalWeight: 1
+  minProposalInterval: 4
+  maxProposalInterval: 6
+  maxActiveProposals: 1
   recentProposalsToAvoid: 2
   recentObstaclesToAvoid: 1
   maxCategoryStreak: 2

@@ -18,7 +18,7 @@ public class RunSpawner : MonoBehaviour
     [SerializeField] private GameController gameController;
     [SerializeField] private Transform[] spawnPoints;
 
-    [Header("Ritmo — segundos")]
+    [Header("Ritmo geral — segundos")]
     [FormerlySerializedAs("spawnInterval")]
     [SerializeField, Min(0.1f)]
     private float minSpawnInterval = 1.2f;
@@ -39,10 +39,21 @@ public class RunSpawner : MonoBehaviour
 
     [Header("Chance relativa de cada categoria")]
     [SerializeField, Min(0f)]
-    private float obstacleWeight = 1f;
+    private float obstacleWeight = 2f;
 
     [SerializeField, Min(0f)]
     private float proposalWeight = 1f;
+
+    [Header("Frequência específica das propostas")]
+    [SerializeField, Min(0.1f)]
+    private float minProposalInterval = 4f;
+
+    [SerializeField, Min(0.1f)]
+    private float maxProposalInterval = 6f;
+
+    [Tooltip("Quantidade máxima de propostas presentes ao mesmo tempo.")]
+    [SerializeField, Min(1)]
+    private int maxActiveProposals = 1;
 
     [Header("Variedade")]
     [Tooltip("Quantidade de propostas recentes que serão evitadas.")]
@@ -53,7 +64,7 @@ public class RunSpawner : MonoBehaviour
     [SerializeField, Min(0)]
     private int recentObstaclesToAvoid = 1;
 
-    [Tooltip("Limite seguido de obstáculos ou propostas, se ambos disponíveis.")]
+    [Tooltip("Limite seguido da mesma categoria, quando ambas disponíveis.")]
     [SerializeField, Min(1)]
     private int maxCategoryStreak = 2;
 
@@ -90,11 +101,13 @@ public class RunSpawner : MonoBehaviour
 
     private float remainingTime;
     private float previousInterval;
+    private float proposalCooldown;
 
     private void OnEnable()
     {
         lastPoint = null;
         categoryStreak = 0;
+        proposalCooldown = 0f;
 
         laneBag.Clear();
         recentProposals.Clear();
@@ -108,6 +121,11 @@ public class RunSpawner : MonoBehaviour
     {
         if (gameController == null || !gameController.IsRunning)
             return;
+
+        proposalCooldown = Mathf.Max(
+            0f,
+            proposalCooldown - Time.deltaTime
+        );
 
         remainingTime -= Time.deltaTime;
 
@@ -202,7 +220,7 @@ public class RunSpawner : MonoBehaviour
         );
 
         // Se faltarem alternativas, libera primeiro
-        // o item mais antigo do histórico.
+        // os itens mais antigos do histórico.
         for (; blockedCount >= 0; blockedCount--)
         {
             candidates.Clear();
@@ -250,6 +268,25 @@ public class RunSpawner : MonoBehaviour
             history.RemoveAt(0);
     }
 
+    private bool CanSpawnProposal()
+    {
+        if (proposalCooldown > 0f)
+            return false;
+
+        int activeProposals = 0;
+
+        foreach (RoadItem item in activeItems)
+        {
+            if (item != null &&
+                item.Kind == RoadItem.ItemKind.Proposal)
+            {
+                activeProposals++;
+            }
+        }
+
+        return activeProposals < Mathf.Max(1, maxActiveProposals);
+    }
+
     private bool HasEntrySpace(Transform point)
     {
         foreach (RoadItem item in activeItems)
@@ -292,6 +329,7 @@ public class RunSpawner : MonoBehaviour
             point => point == null || !validLanes.Contains(point)
         );
 
+        // Usa todas as lanes antes de começar outra rodada.
         if (laneBag.Count == 0)
             laneBag.AddRange(validLanes);
 
@@ -323,9 +361,12 @@ public class RunSpawner : MonoBehaviour
         float proposalChance =
             HasValidOption(proposals, RoadItem.ItemKind.Proposal)
             && gameController.ProposalSpeed > 0f
+            && CanSpawnProposal()
                 ? SafeWeight(proposalWeight)
                 : 0f;
 
+        // Só força alternância se as duas categorias
+        // puderem aparecer neste momento.
         if (obstacleChance > 0f &&
             proposalChance > 0f &&
             categoryStreak >= Mathf.Max(1, maxCategoryStreak))
@@ -391,6 +432,24 @@ public class RunSpawner : MonoBehaviour
                 : 1;
 
         lastKind = selectedKind;
+
+        if (selectedKind == RoadItem.ItemKind.Proposal)
+        {
+            float minimum = Mathf.Max(
+                0.1f,
+                minProposalInterval
+            );
+
+            float maximum = Mathf.Max(
+                minimum,
+                maxProposalInterval
+            );
+
+            proposalCooldown = UnityEngine.Random.Range(
+                minimum,
+                maximum
+            );
+        }
 
         return true;
     }
