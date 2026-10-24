@@ -1491,35 +1491,59 @@ MonoBehaviour:
   roadsideSpeed: 2
   obstacleSpeed: 3
   proposalSpeed: 1
-  metersPerWorldUnit: 2.5
+  metersPerWorldUnit: 1
   roadProgression:
-  - afterMeters: 50
-    increaseBy: 0.5
-  - afterMeters: 150
+  - afterMeters: 15
+    increaseBy: 0.25
+  - afterMeters: 35
     increaseBy: 1
-  - afterMeters: 200
-    increaseBy: 4
+  - afterMeters: 60
+    increaseBy: 0.25
+  - afterMeters: 90
+    increaseBy: 1
+  - afterMeters: 130
+    increaseBy: 0.25
+  - afterMeters: 180
+    increaseBy: 2
+  - afterMeters: 250
+    increaseBy: 1
+  - afterMeters: 350
+    increaseBy: 3
   roadsideProgression:
-  - afterMeters: 50
-    increaseBy: 0.5
-  - afterMeters: 150
+  - afterMeters: 15
+    increaseBy: 0.15
+  - afterMeters: 35
     increaseBy: 1
-  - afterMeters: 200
-    increaseBy: 4
+  - afterMeters: 60
+    increaseBy: 0.15
+  - afterMeters: 90
+    increaseBy: 1
+  - afterMeters: 130
+    increaseBy: 0.15
+  - afterMeters: 180
+    increaseBy: 2
+  - afterMeters: 250
+    increaseBy: 1
+  - afterMeters: 350
+    increaseBy: 3
   obstacleProgression:
-  - afterMeters: 50
-    increaseBy: 0.5
-  - afterMeters: 150
+  - afterMeters: 0.25
+    increaseBy: 0
+  - afterMeters: 35
     increaseBy: 1
-  - afterMeters: 200
-    increaseBy: 4
-  proposalProgression:
-  - afterMeters: 50
-    increaseBy: 0.3
-  - afterMeters: 150
-    increaseBy: 0.4
-  - afterMeters: 200
-    increaseBy: 0.6
+  - afterMeters: 60
+    increaseBy: 0.25
+  - afterMeters: 90
+    increaseBy: 1
+  - afterMeters: 130
+    increaseBy: 0.25
+  - afterMeters: 180
+    increaseBy: 2
+  - afterMeters: 250
+    increaseBy: 1
+  - afterMeters: 350
+    increaseBy: 3
+  proposalProgression: []
   leftSceneName: GameOverLeft
   rightSceneName: GameOverRight
   centerSceneName: GameOverNoProposals
@@ -1913,10 +1937,16 @@ MonoBehaviour:
   - {fileID: 897551918}
   - {fileID: 1333782552}
   - {fileID: 1496139376}
-  spawnInterval: 1.5
+  minSpawnInterval: 1.5
+  maxSpawnInterval: 1.8
+  maxIntervalChange: 0.25
   minimumEntryGap: 2
+  blockedRetryInterval: 0.12
   obstacleWeight: 2
   proposalWeight: 1
+  recentProposalsToAvoid: 2
+  recentObstaclesToAvoid: 1
+  maxCategoryStreak: 2
   obstacles:
   - prefab: {fileID: 5968751223182846586, guid: 30a16afb0438647efbf9fc437915b144, type: 3}
     weight: 1
