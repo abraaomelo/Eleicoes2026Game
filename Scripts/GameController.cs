@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameController : MonoBehaviour
 {
@@ -116,10 +117,12 @@ public class GameController : MonoBehaviour
         collectedProposals = 0;
 
         result = RunResult.None;
-        isRunning = true;
+        isRunning = !GameTransition.IsActive;
 
         if (playerMovement != null)
-            playerMovement.enabled = true;
+            playerMovement.enabled = isRunning;
+
+
     }
 
     private void Update()
@@ -241,7 +244,14 @@ public class GameController : MonoBehaviour
                 break;
         }
 
-        SceneManager.LoadSceneAsync(sceneName);
+        if (GameAudio.Instance != null)
+            GameAudio.Instance.StopRunning();
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.StopMusic();
+
+        StartCoroutine(FinishRunRoutine(sceneName));
+
     }
 
     public void RestartRun()
@@ -250,5 +260,53 @@ public class GameController : MonoBehaviour
             SceneManager.GetActiveScene().buildIndex
         );
     }
+
+    private void OnEnable()
+    {
+        GameTransition.SceneReady += BeginRun;
+    }
+
+    private void OnDisable()
+    {
+        GameTransition.SceneReady -= BeginRun;
+    }
+
+    private void BeginRun()
+    {
+        if (result != RunResult.None)
+            return;
+
+        isRunning = true;
+
+        if (playerMovement != null)
+            playerMovement.enabled = true;
+    }
+
+    private IEnumerator FinishRunRoutine(string sceneName)
+    {
+        float impactDuration = 0f;
+
+        if (GameAudio.Instance != null)
+            impactDuration = GameAudio.Instance.PlayCollision();
+
+        // O GameAudio permanece carregado durante a sequência.
+        if (impactDuration > 0f)
+            yield return new WaitForSecondsRealtime(impactDuration);
+
+        if (GameTransition.Instance != null)
+        {
+            GameTransition.Instance.LoadScene(
+                sceneName,
+                GameTransition.Style.Shutter
+            );
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync(sceneName);
+        }
+    }
+
+
+
 }
 

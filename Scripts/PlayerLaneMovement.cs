@@ -32,12 +32,24 @@ public class PlayerLaneMovement : MonoBehaviour
 
     public void MoveLeft()
     {
-        currentLane = Mathf.Max(-1, currentLane - 1);
+        if (!isActiveAndEnabled || currentLane <= -1)
+            return;
+
+        currentLane--;
+
+        if (GameAudio.Instance != null)
+            GameAudio.Instance.PlayLaneChange();
     }
 
     public void MoveRight()
     {
-        currentLane = Mathf.Min(1, currentLane + 1);
+        if (!isActiveAndEnabled || currentLane >= 1)
+            return;
+
+        currentLane++;
+
+        if (GameAudio.Instance != null)
+            GameAudio.Instance.PlayLaneChange();
     }
 }
 

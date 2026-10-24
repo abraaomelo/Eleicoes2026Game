@@ -143,6 +143,8 @@ MonoBehaviour:
   proposalDescription: 
   side: 1
   points: 1
+  collectionSoundOverride: {fileID: 8300000, guid: 709c7139f171d4bcbbbc195763c18ab0, type: 3}
+  collectionOverrideVolume: 0.5
   gameController: {fileID: 0}
   despawnY: -6
 --- !u!61 &3680294017942075008

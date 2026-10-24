@@ -26,6 +26,13 @@ public class RoadItem : MonoBehaviour
     [SerializeField] private ProposalSide side;
     [SerializeField, Min(1)] private int points = 1;
 
+    [Header("Som exclusivo desta proposta")]
+    [Tooltip("Vazio: usa o som padrão configurado no GameAudio.")]
+    [SerializeField] private AudioClip collectionSoundOverride;
+
+    [SerializeField, Range(0f, 1f)]
+    private float collectionOverrideVolume = 0.5f;
+
     [Header("Movimento")]
     [SerializeField] private GameController gameController;
     [SerializeField] private float despawnY = -6f;
@@ -84,8 +91,19 @@ public class RoadItem : MonoBehaviour
         if (gameController.CollectProposal(this))
         {
             collected = true;
+
+            if (GameAudio.Instance != null)
+            {
+                GameAudio.Instance.PlayProposal(
+                    side,
+                    collectionSoundOverride,
+                    collectionOverrideVolume
+                );
+            }
+
             Destroy(gameObject);
         }
     }
 }
+
 

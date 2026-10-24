@@ -83,5 +83,11 @@ public class MusicManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
         Instance = null;
     }
+
+    public void StopMusic()
+    {
+        if (audioSource != null)
+            audioSource.Stop();
+    }
 }
 

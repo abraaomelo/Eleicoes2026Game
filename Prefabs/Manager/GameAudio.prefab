@@ -61,7 +61,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 005e259e456794651ace580e41108626, type: 3}
     volume: 0.5
   rightProposal:
-    clip: {fileID: 8300000, guid: 050073b40be044f1caed453dce14d2f2, type: 3}
+    clip: {fileID: 8300000, guid: 005e259e456794651ace580e41108626, type: 3}
     volume: 0.5
   electronicUrn:
     clip: {fileID: 8300000, guid: 050073b40be044f1caed453dce14d2f2, type: 3}

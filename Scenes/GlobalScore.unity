@@ -273,6 +273,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &349280139
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 486.21115
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1711.131
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313575874686192664, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452216308361676944, guid: 52c11012f2e064791a96280375128f78, type: 3}
+      propertyPath: m_Name
+      value: GameTransition
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 52c11012f2e064791a96280375128f78, type: 3}
 --- !u!1 &443157286
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +478,7 @@ GameObject:
   - component: {fileID: 597414097}
   - component: {fileID: 597414100}
   - component: {fileID: 597414099}
+  - component: {fileID: 597414101}
   - component: {fileID: 597414098}
   m_Layer: 5
   m_Name: MenuButton
@@ -543,6 +601,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597414096}
   m_CullTransparentMesh: 1
+--- !u!114 &597414101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597414096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ba9cc05f36f4613ae8cd770f171d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
 --- !u!1 &741640665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,6 +1304,7 @@ GameObject:
   - component: {fileID: 1170587319}
   - component: {fileID: 1170587322}
   - component: {fileID: 1170587321}
+  - component: {fileID: 1170587323}
   - component: {fileID: 1170587320}
   m_Layer: 5
   m_Name: RetryButton
@@ -1356,6 +1427,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170587318}
   m_CullTransparentMesh: 1
+--- !u!114 &1170587323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170587318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ba9cc05f36f4613ae8cd770f171d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
 --- !u!1001 &1272210205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2546,3 +2629,4 @@ SceneRoots:
   - {fileID: 186357485}
   - {fileID: 1014674118}
   - {fileID: 1272210205}
+  - {fileID: 349280139}
